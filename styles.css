@@ -1058,57 +1058,84 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* General mobile adjustments */
+    /* Ajustes generales */
     .container {
         width: 100%;
         max-width: 100%;
         padding: 0 15px;
     }
 
-    section {
-        padding: 3rem 0;
-    }
-
-    .section-title h2 {
-        font-size: 1.8rem;
-    }
-
-    /* Header adjustments */
+    /* Header y menú móvil - Solución mejorada */
     .header-container {
         padding: 10px 15px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+        position: relative;
     }
     
     .logo {
-        max-width: 100%;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .logo-text {
-        margin-right: 0;
-        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        max-width: calc(100% - 50px);
+        z-index: 1001;
     }
     
     .logo img {
-        height: 60px;
+        height: 50px;
+        width: auto;
+    }
+    
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        margin-right: 0;
+    }
+    
+    .logo-text h1 {
+        font-size: 0.9rem;
+        line-height: 1.2;
+        margin-bottom: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+    
+    .logo-text p {
+        font-size: 0.7rem;
+        opacity: 0.8;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
     }
     
     .mobile-menu-btn {
         display: block;
+        z-index: 1002;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        padding: 10px;
     }
     
     .nav-menu {
         position: fixed;
-        top: 0;
+        top: 80px; /* Empieza debajo del header */
         right: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--color-primary);
-        padding: 80px 20px 20px;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-        z-index: 1000;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(44, 62, 80, 0.98);
+        backdrop-filter: blur(5px);
+        padding: 20px;
+        z-index: 999;
         overflow-y: auto;
+        transition: right 0.3s ease;
     }
     
     .nav-menu.active {
@@ -1117,7 +1144,7 @@ footer {
     
     nav ul {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 15px;
     }
     
     nav li {
@@ -1126,92 +1153,54 @@ footer {
     
     nav a {
         display: block;
-        padding: 12px 0;
-        font-size: 1rem;
+        padding: 15px 0;
+        font-size: 1.2rem;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    
-    /* Hero section adjustments */
-    .hero {
-        height: auto;
-        min-height: 100vh;
-        padding-top: 100px;
-        padding-bottom: 50px;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.3rem;
-    }
-    
-    .hero-content {
-        padding: 0 15px;
-    }
-    
-    .hero-video {
-        width: 100vw;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .btn {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    /* Profile grid adjustments */
-    .profile-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .profile-card, 
-    .vision-content, 
-    .pdf-viewer,
+
+    /* Solución definitiva para departamentos */
     .department-content {
-        padding: 1.5rem;
+        max-height: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.2s ease;
     }
     
-    /* PDF viewer adjustments */
-    .pdf-viewer {
-        width: 100%;
-        padding: 1rem;
+    .department-card.active .department-content {
+        max-height: 5000px;
+        padding: 1.5rem !important;
+        visibility: visible;
+        opacity: 1;
+        transition: max-height 0.5s ease, opacity 0.3s ease;
     }
     
-    .pdf-viewer iframe {
-        width: 100%;
-        height: 400px;
+    .department-card:not(.active) .department-content > * {
+        display: none !important;
     }
     
-    /* Activities grid adjustments */
-    .activities-grid,
-    .department-content .activities-grid,
-    .sports-grid, 
-    .recreational-grid {
-        grid-template-columns: 1fr;
+    .department-header {
+        padding: 1.2rem 1.5rem;
+        position: relative;
     }
     
-    .activity-card,
-    .sport-card,
-    .recreational-card {
-        width: 100%;
+    .department-header h3 {
+        font-size: 1.1rem;
+        margin-right: 30px;
     }
     
-    .activity-gallery {
-        height: 200px;
+    .department-header i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
     }
     
-    /* Footer adjustments */
-    .footer-content {
-        flex-direction: column;
-    }
-    
-    .footer-section {
-        flex: 1 1 100%;
-        margin-bottom: 1.5rem;
+    .department-card.active .department-header i {
+        transform: translateY(-50%) rotate(180deg);
     }
 }
 
