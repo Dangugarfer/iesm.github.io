@@ -1065,7 +1065,15 @@ footer {
         padding: 0 15px;
     }
 
-    /* Header y menú móvil - Solución mejorada */
+    section {
+        padding: 3rem 0;
+    }
+
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Header y menú móvil - Texto en una sola línea */
     .header-container {
         padding: 10px 15px;
         height: 80px;
@@ -1073,7 +1081,6 @@ footer {
         align-items: center;
         justify-content: space-between;
         background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        position: relative;
     }
     
     .logo {
@@ -1087,32 +1094,35 @@ footer {
     .logo img {
         height: 50px;
         width: auto;
+        flex-shrink: 0;
     }
     
     .logo-text {
         display: flex;
         flex-direction: column;
-        margin-right: 0;
+        overflow: visible;
     }
     
     .logo-text h1 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.2;
         margin-bottom: 0.2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 200px;
+        white-space: normal; /* Cambiado de nowrap a normal */
+        overflow: visible; /* Cambiado de hidden a visible */
+        text-overflow: clip; /* Cambiado de ellipsis a clip */
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limita a 2 líneas */
+        -webkit-box-orient: vertical;
     }
     
     .logo-text p {
-        font-size: 0.7rem;
+        font-size: 0.1rem;
         opacity: 0.8;
-        white-space: nowrap;
+        white-space: nowrap; /* Mantenemos esto en una línea */
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 200px;
     }
+
     
     .mobile-menu-btn {
         display: block;
@@ -1158,7 +1168,13 @@ footer {
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Solución definitiva para departamentos */
+    /* Perfiles académicos en una sola columna */
+    .profile-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    /* Ajustes para departamentos */
     .department-content {
         max-height: 0;
         padding: 0 !important;
@@ -1201,6 +1217,33 @@ footer {
     
     .department-card.active .department-header i {
         transform: translateY(-50%) rotate(180deg);
+    }
+    
+    /* Ajustes adicionales */
+    .pdf-viewer {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .pdf-viewer iframe {
+        width: 100%;
+        height: 400px;
+    }
+    
+    .activities-grid,
+    .department-content .activities-grid,
+    .sports-grid, 
+    .recreational-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    .footer-section {
+        flex: 1 1 100%;
+        margin-bottom: 1.5rem;
     }
 }
 
