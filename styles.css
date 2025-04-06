@@ -1116,7 +1116,7 @@ footer {
     }
     
     .logo-text p {
-        font-size: 0.1rem;
+        font-size: 0.6rem;
         opacity: 0.8;
         white-space: nowrap; /* Mantenemos esto en una línea */
         overflow: hidden;
