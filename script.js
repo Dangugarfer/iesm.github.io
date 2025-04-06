@@ -87,6 +87,19 @@ document.querySelectorAll('.department-header').forEach(header => {
         // Abrir el actual si no estaba activo
         if (!wasActive) {
             card.classList.add('active');
+            
+            // En dispositivos móviles, desplazar para mostrar el inicio del contenido
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const cardPosition = card.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: cardPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50); // Pequeño retardo para permitir que el contenido se despliegue
+            }
         }
     });
 });
